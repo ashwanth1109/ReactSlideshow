@@ -1,4 +1,56 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
 * {
     margin: 0;
     padding: 0;
+    font-family: "Quicksand", sans-serif;
+    color: #fff;
+}
+
+/*====== WIDTH ======*/
+.screenW {
+    width: 100vw;
+}
+.fullW {
+    width: 100%;
+}
+/*====== HEIGHT ======*/
+.screenH {
+    height: 100vh;
+}
+.fullH {
+    height: 100%;
+}
+/*====== BG COLOR ======*/
+.dGray {
+    background-color: #333;
+}
+.white {
+    background-color: #fff;
+}
+/*====== FONT ======*/
+.fSize2 {
+    font-size: 2rem;
+}
+/*====== FLEX ======*/
+.df {
+    display: flex;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+}
+.col {
+    display: flex;
+    flex-direction: column;
+}
+.fCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex1 {
+    flex: 1;
+}
+.flex8 {
+    flex: 8;
 }
