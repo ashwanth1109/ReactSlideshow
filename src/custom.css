@@ -31,6 +31,27 @@
 .fSize2 {
     font-size: 2rem;
 }
+/*====== IMAGE ======*/
+.imgCover {
+    object-fit: cover;
+}
+/*====== OVERFLOW ======*/
+.overflowH {
+    overflow: hidden;
+}
+/*====== POSITION ======*/
+.abs {
+    position: absolute;
+}
+.rel {
+    position: relative;
+}
+.left0 {
+    left: 0px;
+}
+.left100vw {
+    left: 100vw;
+}
 /*====== FLEX ======*/
 .df {
     display: flex;

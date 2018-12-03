@@ -2,15 +2,17 @@
 // IMPORT DEPENDENCIES
 //===========================================
 import React, { Component } from "react";
+import Slide from "./Slide";
+import slide1 from "./assets/slide1.jpg";
+import slide2 from "./assets/slide2.jpg";
 
 //===========================================
 // CREATE STYLES OBJECT
 //===========================================
 const s = {
-    container: "screenW screenH dGray col",
-    header: "flex1 fCenter fSize2",
-    main: "flex8 white",
-    footer: "flex1 fCenter"
+    container: "fullW fullH rel overflowH",
+    onScreen: "left0",
+    offScreenRight: "left100vw"
 };
 
 //===========================================
@@ -19,8 +21,9 @@ const s = {
 class Slideshow extends Component {
     render() {
         return (
-            <div>
-                <div />
+            <div className={s.container}>
+                <Slide image={slide1} position={s.onScreen} />
+                <Slide image={slide2} position={s.offScreenRight} />
             </div>
         );
     }
