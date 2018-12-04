@@ -3,10 +3,7 @@
 //===========================================
 import React, { Component } from "react";
 import Slide from "./Slide";
-import slide1 from "./assets/slide1.jpg";
-import slide2 from "./assets/slide2.jpg";
-import slide3 from "./assets/slide3.jpg";
-import slide4 from "./assets/slide4.jpg";
+import Dots from "./Dots";
 
 //===========================================
 // CREATE STYLES OBJECT
@@ -16,13 +13,8 @@ const s = {
     onScreen: "left0",
     offScreenRight: "left100vw",
     offScreenLeft: "leftM100vw",
-    transition: "transition2l"
+    transition: "transition1l"
 };
-
-//===========================================
-// SLIDES ARRAY
-//===========================================
-const slides = [slide1, slide2, slide3, slide4];
 
 //===========================================
 // SLIDESHOW COMPONENT
@@ -31,16 +23,17 @@ class Slideshow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            current: {
+            slide1: {
                 id: 0,
                 position: s.onScreen,
                 transition: true
             },
-            next: {
+            slide2: {
                 id: 1,
                 position: s.offScreenRight,
                 transition: true
-            }
+            },
+            currentId: 0
         };
     }
 
@@ -48,24 +41,32 @@ class Slideshow extends Component {
         this.startCarousel();
     }
 
+    componentWillUnmount() {
+        clearInterval(this.carouselInterval);
+    }
+
     startCarousel = () => {
-        setInterval(() => {
+        this.carouselInterval = setInterval(() => {
             this.transitionSlides();
         }, 4000);
     };
 
     transitionSlides = () => {
-        const { current, next } = this.state;
-        if (current["position"] === s.onScreen) {
-            current["position"] = s.offScreenLeft;
-            next["position"] = s.onScreen;
+        const { slide1, slide2 } = this.state;
+        let currentId;
+        if (slide1["position"] === s.onScreen) {
+            slide1["position"] = s.offScreenLeft;
+            slide2["position"] = s.onScreen;
+            currentId = slide2.id;
         } else {
-            current["position"] = s.onScreen;
-            next["position"] = s.offScreenLeft;
+            slide1["position"] = s.onScreen;
+            slide2["position"] = s.offScreenLeft;
+            currentId = slide1.id;
         }
         this.setState({
-            current: current,
-            next: next
+            slide1: slide1,
+            slide2: slide2,
+            currentId: currentId
         });
         setTimeout(() => {
             this.resetSlideOffScreen();
@@ -73,44 +74,47 @@ class Slideshow extends Component {
     };
 
     resetSlideOffScreen = () => {
-        const { current, next } = this.state;
-        if (current["position"] === s.offScreenLeft) {
-            current["transition"] = false;
-            current["position"] = s.offScreenRight;
-            current["id"] = next.id + 1 === slides.length ? 0 : next.id + 1;
+        const { slide1, slide2 } = this.state;
+        const { slides } = this.props;
+        if (slide1["position"] === s.offScreenLeft) {
+            slide1["transition"] = false;
+            slide1["position"] = s.offScreenRight;
+            slide1["id"] = slide2.id + 1 === slides.length ? 0 : slide2.id + 1;
         } else {
-            next["transition"] = false;
-            next["position"] = s.offScreenRight;
-            next["id"] = current.id + 1 === slides.length ? 0 : current.id + 1;
+            slide2["transition"] = false;
+            slide2["position"] = s.offScreenRight;
+            slide2["id"] = slide1.id + 1 === slides.length ? 0 : slide1.id + 1;
         }
         this.setState({
-            current: current,
-            next: next
+            slide1: slide1,
+            slide2: slide2
         });
         setTimeout(() => {
-            current["transition"] = true;
-            next["transition"] = true;
+            slide1["transition"] = true;
+            slide2["transition"] = true;
             this.setState({
-                current: current,
-                next: next
+                slide1: slide1,
+                slide2: slide2
             });
         }, 500);
     };
 
     render() {
-        const { current, next } = this.state;
+        const { slide1, slide2, currentId } = this.state;
+        const { slides } = this.props;
         return (
             <div className={s.container}>
                 <Slide
-                    image={slides[current.id]}
-                    position={current.position}
-                    transition={current.transition ? s.transition : ""}
+                    image={slides[slide1.id]}
+                    position={slide1.position}
+                    transition={slide1.transition ? s.transition : ""}
                 />
                 <Slide
-                    image={slides[next.id]}
-                    position={next.position}
-                    transition={next.transition ? s.transition : ""}
+                    image={slides[slide2.id]}
+                    position={slide2.position}
+                    transition={slide2.transition ? s.transition : ""}
                 />
+                <Dots slideId={currentId} slides={slides} />
             </div>
         );
     }

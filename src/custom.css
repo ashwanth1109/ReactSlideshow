@@ -20,12 +20,21 @@
 .fullH {
     height: 100%;
 }
+.height70 {
+    height: 70px;
+}
 /*====== BG COLOR ======*/
 .dGray {
     background-color: #333;
 }
 .white {
     background-color: #fff;
+}
+.white50 {
+    background-color: #ffffff80;
+}
+.black50 {
+    background-color: #00000080;
 }
 /*====== FONT ======*/
 .fSize2 {
@@ -40,8 +49,8 @@
     overflow: hidden;
 }
 /*====== TRANSITIONS ======*/
-.transition2l {
-    transition: left 2s ease-in-out;
+.transition1l {
+    transition: left 1s ease-in-out;
 }
 /*====== POSITION ======*/
 .abs {
@@ -58,6 +67,9 @@
 }
 .leftM100vw {
     left: -100vw;
+}
+.bot0 {
+    bottom: 0;
 }
 /*====== FLEX ======*/
 .df {
@@ -81,4 +93,12 @@
 }
 .flex8 {
     flex: 8;
+}
+
+/*====== CUSTOM ======*/
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    transition: background-color 1s ease-in-out;
 }
