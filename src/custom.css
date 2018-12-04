@@ -39,6 +39,10 @@
 .overflowH {
     overflow: hidden;
 }
+/*====== TRANSITIONS ======*/
+.transition2l {
+    transition: left 2s ease-in-out;
+}
 /*====== POSITION ======*/
 .abs {
     position: absolute;
@@ -51,6 +55,9 @@
 }
 .left100vw {
     left: 100vw;
+}
+.leftM100vw {
+    left: -100vw;
 }
 /*====== FLEX ======*/
 .df {
