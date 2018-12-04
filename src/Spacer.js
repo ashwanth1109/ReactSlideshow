@@ -1,14 +1,17 @@
-import React, { Component } from "react";
+//===========================================
+// IMPORT DEPENDENCIES
+//===========================================
+import React, { memo } from "react";
 
-class Spacer extends Component {
-    render() {
-        const { w, h } = this.props;
-        if (w) {
-            return <div style={{ width: w }} className="fullH" />;
-        } else if (h) {
-            return <div style={{ height: h }} className="fullW" />;
-        }
+//===========================================
+// SPACER FUNCTIONAL COMPONENT
+//===========================================
+const Spacer = ({ w, h }) => {
+    if (w) {
+        return <div style={{ width: w }} className="fullH" />;
+    } else if (h) {
+        return <div style={{ height: h }} className="fullW" />;
     }
-}
+};
 
-export default Spacer;
+export default memo(Spacer);
